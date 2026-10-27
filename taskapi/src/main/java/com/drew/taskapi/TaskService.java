@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class TaskService {
@@ -30,5 +31,14 @@ public class TaskService {
         if (!repo.existsById(id)) return false;
         repo.deleteById(id);
         return true;
+    }
+
+    @Transactional
+    public Optional<Task> update(Long id, String title, Boolean done) {
+        return repo.findById(id).map(task -> {
+            if (title != null) task.setTitle(title);
+            if (done != null) task.setDone(done);
+            return task;
+        });
     }
 }

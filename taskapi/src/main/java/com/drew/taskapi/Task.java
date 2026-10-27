@@ -24,5 +24,6 @@ public class Task {
     public String getTitle() { return title; }
     public boolean isDone() { return done; }
     public void setDone(boolean done) { this.done = done; }
-    
+    public void setTitle(String title) { this.title = title; }
+
 }
